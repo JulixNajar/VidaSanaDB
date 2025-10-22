@@ -108,7 +108,7 @@ SET @fecha_manana = CONVERT(NVARCHAR(20), DATEADD(day, 1, GETDATE()), 23);
 -- Inserción de Turnos
 INSERT INTO Turnos (id_medico, id_paciente, fecha_hora, motivo, estado) VALUES
 -- Citas para HOY
-(1, 1, @fecha_actual + ' 09:00:00', 'Chequeo general', 'Confirmado'),
+(1, 1, @fecha_actual + ' 09:00:00', 'Chequeo general', 'Pendiente'),
 (1, 3, @fecha_actual + ' 10:30:00', 'Revisión cardiológica', 'Confirmado'),
 (2, 2, @fecha_actual + ' 11:00:00', 'Control pediátrico', 'Realizado'),
 (3, 4, @fecha_actual + ' 14:00:00', 'Consulta dermatológica', 'Pendiente'),
