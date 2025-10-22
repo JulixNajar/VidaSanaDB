@@ -85,7 +85,7 @@ INSERT INTO Medicos (nombre, apellido, especialidad, telefono, email) VALUES
 
 INSERT INTO Pacientes (nombre, apellido, fecha_nacimiento, direccion, telefono) VALUES
 
-('Juan', 'López', '1985-05-15', 'Calle A #123', '555-2000'),
+('Juana', 'Campos', '1985-05-15', 'Calle A #123', '555-2000'),
 
 ('María', 'Rojas', '2010-01-20', 'Avenida B #456', '555-2001'),
 
