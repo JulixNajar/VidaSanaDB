@@ -3,35 +3,35 @@ Go
 
 -- 1. Tabla: Medicos
 
--- Entidad que almacena informaciÛn de los doctores.
+-- Entidad que almacena informaci√≥n de los doctores.
 
 -- PRIMARY KEY: id_medico.
 
 CREATE TABLE Medicos (
 
-id_medico INT PRIMARY KEY IDENTITY(1,1),  -- Identificador ˙nico del mÈdico
+id_medico INT PRIMARY KEY IDENTITY(1,1),  -- Identificador √∫nico del m√©dico
 
 nombre VARCHAR(100) NOT NULL,
 
 apellido VARCHAR(100) NOT NULL,
 
-especialidad VARCHAR(100), -- Especialidad mÈdica
+especialidad VARCHAR(100), -- Especialidad m√©dica
 
 telefono VARCHAR(20),
 
-email VARCHAR(100) UNIQUE -- Correo electrÛnico ˙nico
+email VARCHAR(100) UNIQUE -- Correo electr√≥nico √∫nico
 
 );
 
 -- 2. Tabla: Pacientes
 
--- Entidad que almacena informaciÛn de los pacientes.
+-- Entidad que almacena informaci√≥n de los pacientes.
 
 -- PRIMARY KEY: id_paciente.
 
 CREATE TABLE Pacientes (
 
-id_paciente INT PRIMARY KEY IDENTITY(1,1),  -- Identificador ˙nico del paciente
+id_paciente INT PRIMARY KEY IDENTITY(1,1),  -- Identificador √∫nico del paciente
 
 nombre VARCHAR(100) NOT NULL,
 
@@ -62,39 +62,39 @@ CREATE TABLE Turnos (
     motivo VARCHAR(255),
     estado VARCHAR(15) NOT NULL DEFAULT 'Pendiente', 
     
-    -- Coloca la restricciÛn CHECK aquÌ (soluciÛn del error anterior)
+    -- Coloca la restricci√≥n CHECK aqu√≠ (soluci√≥n del error anterior)
     CONSTRAINT CK_TurnoEstado CHECK (estado IN ('Pendiente', 'Confirmado', 'Realizado', 'Cancelado')),
     
-    -- DEFINE LAS CLAVES FOR¡NEAS AL FINAL, SEPARADAS POR COMA
+    -- DEFINE LAS CLAVES FOR√ÅNEAS AL FINAL, SEPARADAS POR COMA
     CONSTRAINT FK_Turnos_Medico FOREIGN KEY (id_medico) REFERENCES Medicos(id_medico),
     CONSTRAINT FK_Turnos_Paciente FOREIGN KEY (id_paciente) REFERENCES Pacientes(id_paciente)
 );
 
 
--- InserciÛn de MÈdicos
+-- Inserci√≥n de M√©dicos
 
 INSERT INTO Medicos (nombre, apellido, especialidad, telefono, email) VALUES
 
-('Ana', 'GÛmez', 'CardiologÌa', '555-1000', 'a.gomez@vidasana.com'),
+('Carlos', 'G√≥mez', 'Cardiolog√≠a', '555-1000', 'a.gomez@vidasana.com'),
 
-('Luis', 'PÈrez', 'PediatrÌa', '555-1001', 'l.perez@vidasana.com'),
+('Luis', 'P√©rez', 'Pediatr√≠a', '555-1001', 'l.perez@vidasana.com'),
 
-('Carla', 'DÌaz', 'DermatologÌa', '555-1002', 'c.diaz@vidasana.com');
+('Carla', 'D√≠az', 'Dermatolog√≠a', '555-1002', 'c.diaz@vidasana.com');
 
--- InserciÛn de Pacientes
+-- Inserci√≥n de Pacientes
 
 INSERT INTO Pacientes (nombre, apellido, fecha_nacimiento, direccion, telefono) VALUES
 
-('Juan', 'LÛpez', '1985-05-15', 'Calle A #123', '555-2000'),
+('Juan', 'L√≥pez', '1985-05-15', 'Calle A #123', '555-2000'),
 
-('MarÌa', 'Rojas', '2010-01-20', 'Avenida B #456', '555-2001'),
+('Mar√≠a', 'Rojas', '2010-01-20', 'Avenida B #456', '555-2001'),
 
 ('Pedro', 'Castro', '1970-11-30', 'Ruta C #789', '555-2002'),
 
 ('Laura', 'Vargas', '1995-07-25', 'Calle D #101', '555-2003');
 
 
--- DECLARACI”N Y ASIGNACI”N DE VARIABLES EN T-SQL
+-- DECLARACI√ìN Y ASIGNACI√ìN DE VARIABLES EN T-SQL
 DECLARE @fecha_actual NVARCHAR(20);
 DECLARE @fecha_manana NVARCHAR(20);
 
@@ -102,19 +102,19 @@ DECLARE @fecha_manana NVARCHAR(20);
 SET @fecha_actual = CONVERT(NVARCHAR(20), GETDATE(), 23); 
 -- El estilo 23 da 'YYYY-MM-DD'.
 
--- Asigna la fecha de maÒana. DATEADD es la funciÛn de T-SQL
+-- Asigna la fecha de ma√±ana. DATEADD es la funci√≥n de T-SQL
 SET @fecha_manana = CONVERT(NVARCHAR(20), DATEADD(day, 1, GETDATE()), 23); 
 
--- InserciÛn de Turnos
+-- Inserci√≥n de Turnos
 INSERT INTO Turnos (id_medico, id_paciente, fecha_hora, motivo, estado) VALUES
 -- Citas para HOY
 (1, 1, @fecha_actual + ' 09:00:00', 'Chequeo general', 'Confirmado'),
-(1, 3, @fecha_actual + ' 10:30:00', 'RevisiÛn cardiolÛgica', 'Confirmado'),
-(2, 2, @fecha_actual + ' 11:00:00', 'Control pedi·trico', 'Realizado'),
-(3, 4, @fecha_actual + ' 14:00:00', 'Consulta dermatolÛgica', 'Pendiente'),
+(1, 3, @fecha_actual + ' 10:30:00', 'Revisi√≥n cardiol√≥gica', 'Confirmado'),
+(2, 2, @fecha_actual + ' 11:00:00', 'Control pedi√°trico', 'Realizado'),
+(3, 4, @fecha_actual + ' 14:00:00', 'Consulta dermatol√≥gica', 'Pendiente'),
 (1, 4, @fecha_actual + ' 16:00:00', 'Dolor de pecho', 'Confirmado'),
--- Cita para MaÒana
-(2, 3, @fecha_manana + ' 09:00:00', 'VacunaciÛn', 'Pendiente'); 
+-- Cita para Ma√±ana
+(2, 3, @fecha_manana + ' 09:00:00', 'Vacunaci√≥n', 'Pendiente'); 
 
 SELECT
     T.id_turno,
@@ -125,7 +125,7 @@ SELECT
     T.estado
 FROM 
     Turnos T
--- Unimos Turnos con Medicos para obtener el nombre del mÈdico asignado.
+-- Unimos Turnos con Medicos para obtener el nombre del m√©dico asignado.
 JOIN 
     Medicos M ON T.id_medico = M.id_medico
 -- Unimos Turnos con Pacientes para obtener el nombre de la persona que toma el turno.
@@ -133,13 +133,13 @@ JOIN
     Pacientes P ON T.id_paciente = P.id_paciente
 WHERE 
     -- ----------------------------------------------------------------------
-    -- **CAMBIO CRÕTICO para SQL Server (T-SQL)**: 
+    -- **CAMBIO CR√çTICO para SQL Server (T-SQL)**: 
     -- ----------------------------------------------------------------------
-    -- 1. CAST(T.fecha_hora AS DATE): Equivale a la funciÛn DATE() de MySQL. 
+    -- 1. CAST(T.fecha_hora AS DATE): Equivale a la funci√≥n DATE() de MySQL. 
     --    Extrae solo la parte de la fecha (YYYY-MM-DD) de la columna DATETIME.
     CAST(T.fecha_hora AS DATE) = 
     
-    -- 2. CAST(GETDATE() AS DATE): Equivale a la funciÛn CURDATE() de MySQL. 
+    -- 2. CAST(GETDATE() AS DATE): Equivale a la funci√≥n CURDATE() de MySQL. 
     --    GETDATE() obtiene la fecha y hora actual, y CAST la convierte solo a la fecha.
     CAST(GETDATE() AS DATE) 
     -- ----------------------------------------------------------------------
@@ -148,9 +148,9 @@ ORDER BY
 
 
 
-   --Usar JOIN para Listar Pacientes con su MÈdico Asignado
+   --Usar JOIN para Listar Pacientes con su M√©dico Asignado
 
---Esta consulta muestra la relaciÛn directa de quiÈn atiende a quiÈn en los turnos.
+--Esta consulta muestra la relaci√≥n directa de qui√©n atiende a qui√©n en los turnos.
 
 SELECT
 
@@ -166,7 +166,7 @@ T.fecha_hora
 
 FROM Turnos T
 
--- Usamos INNER JOIN para asegurarnos de que solo traemos turnos que tienen MÈdico y Paciente v·lidos
+-- Usamos INNER JOIN para asegurarnos de que solo traemos turnos que tienen M√©dico y Paciente v√°lidos
 
 INNER JOIN Pacientes P ON T.id_paciente = P.id_paciente
 
@@ -179,7 +179,7 @@ ORDER BY P.apellido, T.fecha_hora;
 SELECT TOP 1 WITH TIES
     M.nombre,
     M.apellido,
-    COUNT(T.id_turno) AS Total_Citas -- Contamos las citas por mÈdico
+    COUNT(T.id_turno) AS Total_Citas -- Contamos las citas por m√©dico
 FROM 
     dbo.Turnos T
 JOIN 
@@ -209,14 +209,14 @@ WHERE
     T.id_turno IS NULL
 GROUP BY 
     P.id_paciente, P.nombre, P.apellido, P.telefono; 
-    -- Agregamos todas las columnas no agregadas al GROUP BY (est·ndar T-SQL)
+    -- Agregamos todas las columnas no agregadas al GROUP BY (est√°ndar T-SQL)
 
 
 
     SELECT
     AVG(SubConsulta.Total_Citas * 1.0) AS Promedio_Citas_Por_Medico
 FROM (
-    -- Subconsulta: Cuenta el total de citas por cada mÈdico
+    -- Subconsulta: Cuenta el total de citas por cada m√©dico
     SELECT
         id_medico,
         COUNT(id_turno) AS Total_Citas
